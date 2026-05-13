@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Ros Maria Edathil Francis Stanly – Software Engineer & DSP Engineer Portfolio">
+<title>Ros Maria · Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream: #FAF8F3; --warm-tan: #E8E0D0; --brown-mid: #8B7355;
+    --brown-dark: #3D2B1F; --brown-ink: #1C1209; --rust: #B85C3A;
+    --rust-light: #F5E8E2; --sand: #C9B99A; --text-body: #2E2218;
+    --text-muted: #7A6552; --nav-h: 60px;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text-body); font-size: 16px; line-height: 1.7; }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+  .fade-up { opacity:0; animation: fadeUp 0.7s ease forwards; }
+  .fade-up.d1{animation-delay:.1s} .fade-up.d2{animation-delay:.25s} .fade-up.d3{animation-delay:.4s} .fade-up.d4{animation-delay:.55s}
+
+  nav { position:fixed; top:0; left:0; right:0; z-index:100; height:var(--nav-h); background:rgba(250,248,243,0.93); backdrop-filter:blur(8px); border-bottom:1px solid var(--warm-tan); display:flex; align-items:center; justify-content:space-between; padding:0 6%; }
+  .nav-logo { font-family:'Lora',serif; font-size:18px; font-weight:600; color:var(--brown-dark); text-decoration:none; letter-spacing:-.3px; }
+  .nav-links { display:flex; gap:28px; list-style:none; }
+  .nav-links a { text-decoration:none; font-size:12px; font-weight:500; letter-spacing:.8px; text-transform:uppercase; color:var(--text-muted); transition:color .2s; }
+  .nav-links a:hover { color:var(--rust); }
+
+  #hero { min-height:100vh; display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:60px; padding:calc(var(--nav-h) + 60px) 6% 80px; border-bottom:1px solid var(--warm-tan); }
+  .hero-eyebrow { font-size:11px; letter-spacing:2.5px; text-transform:uppercase; color:var(--rust); font-weight:500; margin-bottom:16px; }
+  h1 { font-family:'Lora',serif; font-size:clamp(38px,4.8vw,64px); font-weight:600; line-height:1.1; color:var(--brown-dark); letter-spacing:-1.2px; }
+  h1 em { font-style:italic; color:var(--rust); }
+  .hero-sub { font-size:17px; color:var(--text-muted); max-width:480px; margin:24px 0 40px; font-weight:300; line-height:1.85; }
+  .hero-btns { display:flex; gap:16px; flex-wrap:wrap; }
+  .btn-primary { background:var(--brown-dark); color:var(--cream); padding:14px 30px; border:none; border-radius:2px; font-family:'DM Sans',sans-serif; font-size:13px; font-weight:500; letter-spacing:.4px; cursor:pointer; transition:background .2s; text-decoration:none; display:inline-block; }
+  .btn-primary:hover { background:var(--rust); }
+  .btn-outline { background:transparent; color:var(--brown-dark); padding:14px 30px; border:1.5px solid var(--brown-mid); border-radius:2px; font-family:'DM Sans',sans-serif; font-size:13px; font-weight:500; cursor:pointer; transition:all .2s; text-decoration:none; display:inline-block; }
+  .btn-outline:hover { border-color:var(--rust); color:var(--rust); }
+  .hero-visual { display:flex; justify-content:center; }
+  .avatar-frame { width:300px; height:380px; background:var(--warm-tan); border-radius:4px; position:relative; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+  .avatar-placeholder { font-family:'Lora',serif; font-size:90px; color:var(--sand); user-select:none; }
+  .avatar-tag { position:absolute; bottom:20px; left:20px; background:var(--cream); padding:8px 16px; border-radius:2px; font-size:12px; color:var(--text-muted); font-weight:500; }
+
+  section { padding:100px 6% 80px; }
+  .section-label { font-size:11px; letter-spacing:2.5px; text-transform:uppercase; color:var(--rust); font-weight:500; margin-bottom:12px; }
+  h2 { font-family:'Lora',serif; font-size:clamp(28px,3.2vw,42px); font-weight:600; color:var(--brown-dark); letter-spacing:-.8px; margin-bottom:16px; }
+
+  #about { display:grid; grid-template-columns:1fr 2fr; gap:80px; align-items:start; border-bottom:1px solid var(--warm-tan); }
+  .about-aside { position:sticky; top:80px; }
+  .about-aside-meta { margin-top:32px; display:flex; flex-direction:column; gap:22px; }
+  .meta-item label { font-size:10px; letter-spacing:1.8px; text-transform:uppercase; color:var(--text-muted); display:block; margin-bottom:4px; }
+  .meta-item span { font-size:15px; color:var(--brown-dark); }
+  .about-body p { font-size:17px; line-height:1.9; color:var(--text-muted); font-weight:300; }
+  .about-body p+p { margin-top:20px; }
+  .about-body em { color:var(--text-body); font-style:italic; font-family:'Lora',serif; }
+
+  #skills { border-bottom:1px solid var(--warm-tan); }
+  .skills-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:2px; margin-top:48px; border:1px solid var(--warm-tan); border-radius:4px; overflow:hidden; }
+  .skill-cell { background:white; padding:26px 22px; border-right:1px solid var(--warm-tan); border-bottom:1px solid var(--warm-tan); transition:background .2s; }
+  .skill-cell:hover { background:var(--rust-light); }
+  .skill-cell h3 { font-family:'Lora',serif; font-size:15px; font-weight:600; color:var(--brown-dark); margin-bottom:14px; }
+  .skill-tags { display:flex; flex-wrap:wrap; gap:6px; }
+  .tag { font-size:11px; padding:4px 10px; background:var(--warm-tan); border-radius:2px; color:var(--brown-dark); font-weight:500; }
+
+  #projects { border-bottom:1px solid var(--warm-tan); }
+  .projects-list { margin-top:48px; display:flex; flex-direction:column; gap:2px; }
+  .project-row { display:grid; grid-template-columns:56px 1fr auto; align-items:start; gap:28px; background:white; border:1px solid var(--warm-tan); border-radius:2px; padding:26px 28px; transition:all .2s; text-decoration:none; }
+  .project-row:hover { border-color:var(--rust); }
+  .project-row:hover .proj-arrow { color:var(--rust); transform:translateX(4px); }
+  .proj-num { font-family:'Lora',serif; font-size:26px; color:var(--warm-tan); font-weight:600; padding-top:2px; }
+  .proj-info h3 { font-family:'Lora',serif; font-size:18px; font-weight:600; color:var(--brown-dark); margin-bottom:6px; }
+  .proj-info p { font-size:13px; color:var(--text-muted); font-weight:300; line-height:1.65; }
+  .proj-stack { margin-top:10px; display:flex; flex-wrap:wrap; gap:5px; }
+  .proj-stack span { font-size:10px; padding:3px 8px; background:var(--rust-light); border-radius:2px; color:var(--rust); font-weight:500; }
+  .proj-meta { display:flex; flex-direction:column; align-items:flex-end; gap:8px; padding-top:2px; }
+  .proj-year { font-size:12px; color:var(--text-muted); white-space:nowrap; }
+  .proj-arrow { font-size:18px; color:var(--sand); transition:color .2s,transform .2s; display:inline-block; }
+
+  #resume { border-bottom:1px solid var(--warm-tan); }
+  .resume-layout { display:grid; grid-template-columns:2fr 1fr; gap:60px; margin-top:48px; align-items:start; }
+  .resume-doc { background:white; border:1px solid var(--warm-tan); border-radius:4px; overflow:hidden; }
+  .resume-doc-header { background:var(--brown-dark); padding:20px 28px; display:flex; align-items:center; justify-content:space-between; }
+  .resume-doc-header span { font-family:'Lora',serif; color:var(--cream); font-size:15px; }
+  .resume-doc-header small { font-size:11px; color:var(--sand); letter-spacing:1px; text-transform:uppercase; }
+  .resume-preview { padding:30px 28px; }
+  .resume-section { margin-bottom:26px; }
+  .resume-section h4 { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--rust); margin-bottom:12px; border-bottom:1px solid var(--rust-light); padding-bottom:6px; }
+  .resume-entry { margin-bottom:16px; }
+  .resume-entry-top { display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:4px; }
+  .resume-entry-top strong { font-size:13px; font-weight:500; color:var(--brown-dark); }
+  .resume-entry-top span { font-size:11px; color:var(--text-muted); }
+  .resume-entry p { font-size:12px; color:var(--text-muted); margin-top:2px; font-style:italic; }
+  .resume-entry ul { font-size:12px; color:var(--text-muted); margin-top:5px; padding-left:16px; }
+  .resume-entry ul li { margin-bottom:3px; line-height:1.5; }
+  .resume-gpa { font-size:11px; color:var(--rust); font-weight:500; }
+  .resume-sidebar p { font-size:15px; color:var(--text-muted); font-weight:300; line-height:1.8; }
+  .resume-sidebar-btns { display:flex; flex-direction:column; gap:12px; margin-top:24px; }
+  .resume-sidebar-btns .btn-primary,.resume-sidebar-btns .btn-outline { text-align:center; }
+  .resume-note { font-size:12px; color:var(--text-muted); margin-top:12px; }
+
+  #extras { border-bottom:1px solid var(--warm-tan); }
+  .extras-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-top:48px; }
+  .extras-card { background:white; border:1px solid var(--warm-tan); padding:28px 24px; }
+  .extras-card h3 { font-family:'Lora',serif; font-size:16px; font-weight:600; color:var(--brown-dark); margin-bottom:18px; padding-bottom:10px; border-bottom:1px solid var(--warm-tan); }
+  .extras-item { margin-bottom:14px; }
+  .extras-item p { font-size:13px; color:var(--text-muted); line-height:1.6; }
+  .extras-item p strong { color:var(--brown-dark); font-weight:500; }
+  .extras-badge { display:inline-block; margin-top:4px; font-size:10px; padding:3px 9px; background:var(--rust-light); color:var(--rust); border-radius:2px; font-weight:500; }
+
+  #contact { background:var(--brown-dark); padding:100px 6% 80px; }
+  #contact .section-label { color:var(--sand); }
+  #contact h2 { color:var(--cream); }
+  .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; margin-top:48px; align-items:start; }
+  .contact-lead { font-size:17px; color:var(--sand); font-weight:300; line-height:1.85; }
+  .contact-socials { margin-top:32px; display:flex; flex-direction:column; gap:16px; }
+  .contact-link { display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--sand); font-size:14px; transition:color .2s; }
+  .contact-link:hover { color:white; }
+  .contact-link-icon { width:36px; height:36px; background:rgba(255,255,255,.07); border:1px solid rgba(201,185,154,.2); border-radius:2px; display:flex; align-items:center; justify-content:center; font-size:13px; flex-shrink:0; }
+  .contact-form { display:flex; flex-direction:column; gap:16px; }
+  .form-field { display:flex; flex-direction:column; gap:6px; }
+  .form-field label { font-size:10px; letter-spacing:1.8px; text-transform:uppercase; color:var(--sand); }
+  .form-field input,.form-field textarea { background:rgba(255,255,255,.06); border:1px solid rgba(201,185,154,.25); border-radius:2px; padding:12px 16px; font-family:'DM Sans',sans-serif; font-size:15px; color:var(--cream); outline:none; resize:vertical; transition:border-color .2s; }
+  .form-field input::placeholder,.form-field textarea::placeholder { color:rgba(201,185,154,.35); }
+  .form-field input:focus,.form-field textarea:focus { border-color:var(--sand); }
+  .form-submit { background:var(--rust); color:white; padding:14px 32px; border:none; border-radius:2px; font-family:'DM Sans',sans-serif; font-size:13px; font-weight:500; letter-spacing:.4px; cursor:pointer; align-self:flex-start; transition:opacity .2s; }
+  .form-submit:hover { opacity:.85; }
+  .form-msg { display:none; font-size:14px; color:#8fcfa0; margin-top:4px; }
+
+  footer { background:var(--brown-ink); padding:28px 6%; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+  footer span { font-size:13px; color:var(--sand); }
+  .footer-links { display:flex; gap:24px; }
+  .footer-links a { font-size:13px; color:var(--sand); text-decoration:none; transition:color .2s; }
+  .footer-links a:hover { color:white; }
+
+  @media(max-width:820px){
+    #hero,#about,.resume-layout,.contact-grid,.extras-grid{grid-template-columns:1fr}
+    .hero-visual{display:none} .about-aside{position:static}
+    .project-row{grid-template-columns:44px 1fr 20px;gap:14px;padding:18px}
+    .nav-links{gap:16px}
+  }
+  @media(max-width:560px){ .nav-links{display:none} h1{font-size:36px} }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="nav-logo">Ros Maria</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#resume">Résumé</a></li>
+    <li><a href="#extras">Publications</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-text">
+    <p class="hero-eyebrow fade-up d1">Software Engineer · DSP · AI/ML Researcher</p>
+    <h1 class="fade-up d2">Signals, systems,<br><em>and smart code.</em></h1>
+    <p class="hero-sub fade-up d3">MS Computer Science student at UNF (GPA 3.88) with 3+ years of industry experience in DSP and 5G systems. I build intelligent, signal-aware software — from multimodal AI pipelines to hardware-efficient algorithms.</p>
+    <div class="hero-btns fade-up d4">
+      <a href="#projects" class="btn-primary">View my projects</a>
+      <a href="Ros_Maria_Stanly_Resume.pdf" class="btn-outline" download>Download résumé</a>
+    </div>
+  </div>
+  <div class="hero-visual fade-up d3">
+    <div class="avatar-frame">
+      <!-- Replace with: <img src="your-photo.jpg" style="width:100%;height:100%;object-fit:cover"> -->
+      <span class="avatar-placeholder">✦</span>
+      <div class="avatar-tag">📍 Jacksonville, FL · Open to opportunities</div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="about-aside">
+    <p class="section-label">About</p>
+    <h2 style="font-size:26px;">Who I am</h2>
+    <div class="about-aside-meta">
+      <div class="meta-item"><label>Current</label><span>MS CS · University of North Florida</span></div>
+      <div class="meta-item"><label>Industry</label><span>DSP Engineer · VVDN Technologies</span></div>
+      <div class="meta-item"><label>GPA</label><span>3.88 / 4.0</span></div>
+      <div class="meta-item"><label>Location</label><span>Jacksonville, FL</span></div>
+      <div class="meta-item"><label>Availability</label><span style="color:var(--rust);">Open to opportunities</span></div>
+    </div>
+  </div>
+  <div class="about-body">
+    <p>I'm a software and DSP engineer with a passion for <em>bridging the gap between hardware signals and intelligent software.</em> My background spans 5G wireless systems, FPGA-based algorithm design, and modern AI/ML research.</p>
+    <p>At VVDN Technologies, I developed and optimized DSP algorithms for 5G communication on CPU, GPU, and FPGA platforms — working across MATLAB, Python, C, and Verilog RTL to ensure both precision and hardware efficiency.</p>
+    <p>Now pursuing my MS at the University of North Florida, I channel that engineering rigor into AI research: building multimodal RAG systems, NLP pipelines, and ML-based security tools. I'm a published researcher, an award-winning presenter, and always looking for problems worth solving.</p>
+  </div>
+</section>
+
+<section id="skills">
+  <p class="section-label">Expertise</p>
+  <h2>Skills & tools</h2>
+  <div class="skills-grid">
+    <div class="skill-cell"><h3>Languages</h3><div class="skill-tags"><span class="tag">Python</span><span class="tag">Java</span><span class="tag">C</span><span class="tag">SQL</span><span class="tag">MATLAB</span><span class="tag">Verilog</span></div></div>
+    <div class="skill-cell"><h3>AI / ML</h3><div class="skill-tags"><span class="tag">TensorFlow</span><span class="tag">PyTorch</span><span class="tag">Scikit-learn</span><span class="tag">Keras</span><span class="tag">XGBoost</span><span class="tag">Hugging Face</span></div></div>
+    <div class="skill-cell"><h3>NLP & LLMs</h3><div class="skill-tags"><span class="tag">LLaMA</span><span class="tag">Mistral</span><span class="tag">CLIP</span><span class="tag">Whisper</span><span class="tag">Sentence-BERT</span><span class="tag">Librosa</span></div></div>
+    <div class="skill-cell"><h3>DSP & Hardware</h3><div class="skill-tags"><span class="tag">5G Algorithms</span><span class="tag">FPGA</span><span class="tag">RTL Design</span><span class="tag">Signal Processing</span><span class="tag">HSPICE</span></div></div>
+    <div class="skill-cell"><h3>Tools</h3><div class="skill-tags"><span class="tag">Jupyter</span><span class="tag">Google Colab</span><span class="tag">Tableau</span><span class="tag">MySQL</span><span class="tag">AWS</span><span class="tag">GitHub</span><span class="tag">Linux</span></div></div>
+    <div class="skill-cell"><h3>Concepts</h3><div class="skill-tags"><span class="tag">Graph Neural Networks</span><span class="tag">RAG Systems</span><span class="tag">Clustering</span><span class="tag">PCA / UMAP</span><span class="tag">UI/UX Design</span></div></div>
+  </div>
+</section>
+
+<section id="projects">
+  <p class="section-label">Work</p>
+  <h2>Selected projects</h2>
+  <div class="projects-list">
+
+    <a href="#" class="project-row">
+      <div class="proj-num">01</div>
+      <div class="proj-info">
+        <h3>Multimodal RAG for Academic Resources</h3>
+        <p>Multimodal retrieval-augmented generation system indexing PDFs, slides, videos, images, and audio. Heterogeneous knowledge graph with GNN (GCN & GAT) for semantic re-ranking; locally hosted LLMs for answer generation. Evaluated with Recall@K, MRR, NDCG, BLEU, ROUGE-L, BERTScore.</p>
+        <div class="proj-stack"><span>Python</span><span>PyTorch</span><span>CLIP</span><span>Whisper</span><span>LLaMA</span><span>Mistral</span><span>GNN</span></div>
+      </div>
+      <div class="proj-meta"><span class="proj-year">2024</span><span class="proj-arrow">→</span></div>
+    </a>
+
+    <a href="#" class="project-row">
+      <div class="proj-num">02</div>
+      <div class="proj-info">
+        <h3>Software Requirements Clustering via LLMs</h3>
+        <p>Semantic enrichment pipeline to cluster unstructured NL software requirements using Sentence-BERT embeddings, k-means / HDBSCAN / hierarchical clustering, and automated LLM-based label generation. Evaluated with ARI, NMI, PCA, and UMAP.</p>
+        <div class="proj-stack"><span>Python</span><span>NLP</span><span>Sentence Transformers</span><span>Scikit-learn</span><span>LLaMA</span><span>Mistral</span></div>
+      </div>
+      <div class="proj-meta"><span class="proj-year">2024</span><span class="proj-arrow">→</span></div>
+    </a>
+
+    <a href="#" class="project-row">
+      <div class="proj-num">03</div>
+      <div class="proj-info">
+        <h3>Voice-Based Phishing Detection</h3>
+        <p>End-to-end signal-level vishing detection using MFCCs, log-Mel spectrograms, and a CNN (F1 = 0.91). Applied Grad-CAM to highlight phishing-specific spectral regions. Outperformed SVM, Logistic Regression, and Gradient Boosting baselines.</p>
+        <p style="margin-top:8px;font-size:12px;color:var(--rust);font-weight:500;">🏆 Best CAB Choice Award — UNF School of Computing Symposium 2025</p>
+        <div class="proj-stack"><span>Python</span><span>TensorFlow</span><span>Librosa</span><span>Scikit-learn</span><span>Signal Processing</span></div>
+      </div>
+      <div class="proj-meta"><span class="proj-year">2025</span><span class="proj-arrow">→</span></div>
+    </a>
+
+    <a href="#" class="project-row">
+      <div class="proj-num">04</div>
+      <div class="proj-info">
+        <h3>ML Attack on Hardware PUF</h3>
+        <p>Simulated hybrid current mirror inverter PUF in HSPICE. Generated 100k challenge-response pairs under process variation. Evaluated SVM, Logistic Regression, Decision Trees, KNN — best attack accuracy 92.55% with SVM. PCA & UMAP for feature analysis.</p>
+        <div class="proj-stack"><span>Python</span><span>Scikit-learn</span><span>HSPICE</span><span>PCA</span><span>UMAP</span></div>
+      </div>
+      <div class="proj-meta"><span class="proj-year">2024</span><span class="proj-arrow">→</span></div>
+    </a>
+
+    <a href="#" class="project-row">
+      <div class="proj-num">05</div>
+      <div class="proj-info">
+        <h3>Fast Local Replanning for Single-Query Paths</h3>
+        <p>Novel path planning combining RRT* with local collision-triggered replanning instead of global restart. Demonstrated improved timing efficiency and 100% success rate over standard RRT* and RRTX across 10 independent runs.</p>
+        <p style="margin-top:8px;font-size:12px;color:var(--rust);font-weight:500;">📄 Published — 39th International FLAIRS Conference</p>
+        <div class="proj-stack"><span>MATLAB</span><span>RRT Toolbox</span><span>Algorithm Design</span></div>
+      </div>
+      <div class="proj-meta"><span class="proj-year">2025</span><span class="proj-arrow">→</span></div>
+    </a>
+
+    <a href="#" class="project-row">
+      <div class="proj-num">06</div>
+      <div class="proj-info">
+        <h3>Hybrid Sampling-Bug Path Planning</h3>
+        <p>Combined RT-RRT sampling with Tangent Bug obstacle avoidance in MATLAB across 6 simulated environments of varying obstacle density. Achieved 100% navigation success rate with path length and computation time comparable to RT-RRT.</p>
+        <div class="proj-stack"><span>MATLAB</span><span>RRT Toolbox</span><span>Path Planning</span></div>
+      </div>
+      <div class="proj-meta"><span class="proj-year">2024</span><span class="proj-arrow">→</span></div>
+    </a>
+
+  </div>
+</section>
+
+<section id="resume">
+  <p class="section-label">Résumé</p>
+  <h2>Experience & background</h2>
+  <div class="resume-layout">
+    <div class="resume-doc">
+      <div class="resume-doc-header">
+        <span>Ros Maria Edathil Francis Stanly</span>
+        <small>Résumé · 2026</small>
+      </div>
+      <div class="resume-preview">
+        <div class="resume-section">
+          <h4>Professional Experience</h4>
+          <div class="resume-entry">
+            <div class="resume-entry-top"><strong>DSP Engineer · VVDN Technologies</strong><span>Nov 2021 – Aug 2024</span></div>
+            <p>Kochi, India</p>
+            <ul>
+              <li>Developed & optimized DSP algorithms for 5G wireless systems on CPU, GPU, and FPGA platforms</li>
+              <li>Extracted timing and spatial data from wireless signals in multipath and complex environments</li>
+              <li>Designed algorithms in Python for signal extraction, visualization, and performance analysis</li>
+              <li>Performed fixed-point conversions between MATLAB, C, and Verilog RTL</li>
+              <li>Built test setups with Vector Signal Generator & Analyzer; debugged and tuned lab systems</li>
+              <li>Collaborated with design and verification engineers on RTL and gate-level simulation issues</li>
+            </ul>
+          </div>
+          <div class="resume-entry">
+            <div class="resume-entry-top"><strong>DSP Engineer Intern · VVDN Technologies</strong><span>Aug 2021 – Oct 2021</span></div>
+            <p>Kochi, India</p>
+            <ul>
+              <li>Implemented 5G channel algorithms in MATLAB and Python</li>
+              <li>Performed fixed-point algorithm conversions for hardware efficiency</li>
+              <li>Documented algorithms, code implementations, and test results for team validation</li>
+            </ul>
+          </div>
+        </div>
+        <div class="resume-section">
+          <h4>Education</h4>
+          <div class="resume-entry">
+            <div class="resume-entry-top"><strong>MS Computer Science · University of North Florida</strong><span>Aug 2024 – Dec 2026</span></div>
+            <p>Jacksonville, FL &nbsp;<span class="resume-gpa">GPA: 3.88</span></p>
+            <ul><li>Advanced AI, Algorithms, Programming II (Java), Database, Data Structures, UI/UX Design</li></ul>
+          </div>
+          <div class="resume-entry">
+            <div class="resume-entry-top"><strong>M.Tech ECE · Cochin University of Science and Technology</strong><span>Jul 2019 – Jun 2021</span></div>
+            <p>Kochi, India &nbsp;<span class="resume-gpa">GPA: 4.0</span></p>
+          </div>
+          <div class="resume-entry">
+            <div class="resume-entry-top"><strong>B.Tech ECE · Mahatma Gandhi University</strong><span>Jul 2014 – Jun 2018</span></div>
+            <p>Kottayam, Kerala &nbsp;<span class="resume-gpa">GPA: 3.0</span></p>
+          </div>
+        </div>
+        <div class="resume-section">
+          <h4>Technical Skills</h4>
+          <div class="resume-entry">
+            <p><strong>Languages & Frameworks:</strong> Python, Java, C, SQL, TensorFlow, PyTorch, Scikit-learn, Keras, XGBoost, Hugging Face, Librosa</p>
+            <p style="margin-top:4px;"><strong>Tools:</strong> Jupyter, Google Colab, Tableau, MySQL, AWS, GitHub, Linux, MATLAB, HSPICE</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="resume-sidebar">
+      <p>Download my full résumé as a PDF, or connect with me on LinkedIn and GitHub to explore my research and open-source work.</p>
+      <div class="resume-sidebar-btns">
+        <a href="Ros_Maria_Stanly_Resume.pdf" class="btn-primary" download>⬇ Download PDF résumé</a>
+        <a href="https://linkedin.com/in/ros-maria-edathil-francis-stanly-7880081b4" target="_blank" class="btn-outline">View on LinkedIn</a>
+        <a href="https://github.com/Ros-Maria" target="_blank" class="btn-outline">GitHub Profile</a>
+      </div>
+      <p class="resume-note">Last updated April 2026</p>
+    </div>
+  </div>
+</section>
+
+<section id="extras">
+  <p class="section-label">Recognition</p>
+  <h2>Publications, awards & certifications</h2>
+  <div class="extras-grid">
+    <div class="extras-card">
+      <h3>📄 Publications</h3>
+      <div class="extras-item">
+        <p><strong>Fast and Flexible Sampling-Based Local Replanning for Single-Query Paths in Unknown Environments</strong></p>
+        <p>39th International FLAIRS Conference</p>
+        <span class="extras-badge">Published · 2025</span>
+      </div>
+    </div>
+    <div class="extras-card">
+      <h3>🏆 Awards & Activities</h3>
+      <div class="extras-item">
+        <p><strong>Best Computer Advisory Board Choice Award</strong></p>
+        <p>UNF School of Computing Symposium, December 4, 2025 — Voice-Based Phishing Detection poster</p>
+        <span class="extras-badge">Award · 2025</span>
+      </div>
+      <div class="extras-item" style="margin-top:14px;">
+        <p><strong>AI for Good Hackathon 2025</strong></p>
+        <p>Developed city-level and census-tract affordability indices using housing, transportation, walkability, and income data</p>
+        <span class="extras-badge">Hackathon · 2025</span>
+      </div>
+    </div>
+    <div class="extras-card">
+      <h3>📜 Certifications</h3>
+      <div class="extras-item"><p>Certificate in Embedded Systems & Hardware Design – SMEC Labs</p></div>
+      <div class="extras-item"><p>The Complete Python Bootcamp – Udemy</p></div>
+      <div class="extras-item"><p>Hands-on Workshops on IC Design – Dept. of Electronics, CUSAT</p></div>
+      <div class="extras-item"><p>Digital Design Hands-On – Maven Silicon</p></div>
+      <div class="extras-item"><p>Ready for Research – University of North Florida</p></div>
+    </div>
+    <div class="extras-card">
+      <h3>🎓 Academic Coursework</h3>
+      <div class="extras-item"><p><strong>UNF (MS):</strong> Advanced AI, Design & Analysis of Algorithms, Programming II (Java), Database Systems, Data Structures, UI/UX Design</p></div>
+      <div class="extras-item" style="margin-top:10px;"><p><strong>CUSAT (M.Tech):</strong> VLSI Design & Verification, Advanced Embedded Systems, Advanced Signal Processing, Design Verification & Testing</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <p class="section-label">Get in touch</p>
+  <h2>Let's work together</h2>
+  <div class="contact-grid">
+    <div>
+      <p class="contact-lead">Whether you have a role in mind, a research collaboration, or just want to connect — I'd love to hear from you.</p>
+      <div class="contact-socials">
+        <a href="mailto:rosmaria.francis@yahoo.com" class="contact-link">
+          <span class="contact-link-icon">✉</span>rosmaria.francis@yahoo.com
+        </a>
+        <a href="tel:+19043438537" class="contact-link">
+          <span class="contact-link-icon">📞</span>+1 (904) 343-8537
+        </a>
+        <a href="https://github.com/Ros-Maria" target="_blank" class="contact-link">
+          <span class="contact-link-icon">⌥</span>github.com/Ros-Maria
+        </a>
+        <a href="https://linkedin.com/in/ros-maria-edathil-francis-stanly-7880081b4" target="_blank" class="contact-link">
+          <span class="contact-link-icon">in</span>LinkedIn Profile
+        </a>
+      </div>
+    </div>
+    <form class="contact-form" onsubmit="handleSubmit(event)">
+      <div class="form-field"><label>Your name</label><input type="text" placeholder="Jane Smith" required /></div>
+      <div class="form-field"><label>Email</label><input type="email" placeholder="jane@company.com" required /></div>
+      <div class="form-field"><label>Message</label><textarea rows="4" placeholder="Tell me about your project, role, or opportunity..." required></textarea></div>
+      <button type="submit" class="form-submit">Send message →</button>
+      <p class="form-msg" id="form-msg">✓ Thanks! I'll be in touch soon.</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Ros Maria Edathil Francis Stanly</span>
+  <div class="footer-links">
+    <a href="https://github.com/Ros-Maria" target="_blank">GitHub</a>
+    <a href="https://linkedin.com/in/ros-maria-edathil-francis-stanly-7880081b4" target="_blank">LinkedIn</a>
+    <a href="mailto:rosmaria.francis@yahoo.com">Email</a>
+  </div>
+</footer>
+
+<script>
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('form-msg').style.display = 'block';
+    e.target.reset();
+    // To make the form actually send emails:
+    // 1. Go to formspree.io → create a free account → create a form
+    // 2. Add  action="https://formspree.io/f/YOUR_ID"  method="POST"  to the <form> tag
+  }
+</script>
+</body>
+</html>
